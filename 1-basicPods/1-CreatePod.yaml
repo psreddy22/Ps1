@@ -1,0 +1,25 @@
+apiVersion: v1			# MANDATARY SECTION-I   Of k8s, Pod is available in k8s apiVersion 'v1'
+kind: Pod			# MANDATARY SECTION-II  Of k8s, k8s Controller Names are kinds (Pod, ReplicaSet, Deploymenyt, ReplicaController, Service)	
+
+metadata:			# MANDATARY SECTION-III Of k8s, metadata of above 'kind' information stored under this.
+  name: nainx-pod 		# POD NAME GET CREATED BY k8s.
+
+spec:				# MANDATARY SECTION-IV  Of k8s,
+  containers:
+    - name: nginx-container	# CONTAINER NAME GET CREATED INSIDE POD.
+      image: nginx		# ABOVE CONTAINER SHOULD GET CREATED BY USING THIS IMAGE.
+
+#---------------------------------------------------------------#
+# 		COMMANDS EXECUTED ON THIS FILE			#
+#---------------------------------------------------------------#
+# kc create -f 1-CreatePod.yaml	# POD WILL GET CREATED WITH NAME 'nainx-pod'	
+# kc get pods			# THIS WILL LIST ALL THE PODS INCLUDING 'nainx-pod'
+# kc get pods nainx-pod -o wide	# THIS WILL SHOW ON WHICH WORKER NODE, POD GOT SCHEDULED AND RUNNING.
+# kc describe pod nainx-pod	# THIS WILL GIVE FULL INFORMATION ABOUT POD, CONTAINER AND EVENTS.
+#---------------------------------------------------------------#
+# TESTING THE POD 'nainx-pod'					#
+# GET THE IP ADDRESS OF THE POD BY RUNNNIG THE BELOW COMMAND.	#		
+# kc get pod nainx-pod -o wide					#
+# nginx service generally runs on port number 80 		#	
+# curl http://{IP_ADDRESS}:80 sld give some proper information 	#
+#--------------------------------------------------------------#

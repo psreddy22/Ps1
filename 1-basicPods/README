@@ -1,0 +1,4 @@
+1-CreatePod.yaml : 
+	Creates a single Pod with single container by uisng docker image 'nginx'. 
+2-CreateMultiContainersInPod.yaml:
+	Creates a single Pod with multicontainers container-1, container-2 by using docker images nginx & centos.
