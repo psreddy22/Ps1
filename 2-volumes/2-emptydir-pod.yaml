@@ -1,0 +1,22 @@
+apiVersion: v1					# We Know...!
+kind: Pod
+metadata:
+  name: pod-nginx-emptydir			
+spec:						# Pod Specificaion Starts here..
+  volumes:					# We are defining a 'emptyDir' type volume with name 'emptydir-volume', This is definition only.
+    - name: emptydir-volume			# This is 'emptyDir' volume definition name (Optional), consumer shoule use this name.
+      emptyDir: {}				# This is mandatary String 'emptyDir', if you want to use emptydirectory volues inside containers. 
+
+  containers:					# Container Specification Starts here..
+    - name: nginx-container-emptydir
+      image: nginx
+      imagePullPolicy: IfNotPresent		  
+      volumeMounts:				# Volume Consumer section starts here ....
+        - name: emptydir-volume			# We are consuming the above defined volume name here. Name Should be same as definition.
+          mountPath: /emptydirmount		# Inside a container '/emptydirmount' mount path will get created.
+#-----------------------------------------------#
+# 1. Empty directory mount points are 'EPHEMERAL'
+# 2. Once Pod dies/restarts data will get deletes.
+# 3. Empty directory mounts are just to use temp space inside a container for local usage.
+# 4. Empty directory mounts are created from the worker/menion disk space only.
+#-----------------------------------------------#

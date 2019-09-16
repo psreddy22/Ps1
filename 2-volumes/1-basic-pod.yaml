@@ -1,0 +1,15 @@
+apiVersion: v1			
+kind: Pod
+metadata:
+  name: pod-nginx
+  labels:				# One more Pod metadata type 'labels' key-value data store type.
+    pod-type: web			# This Pod is assgned with label 'pod-type: web'
+spec:
+  containers:
+    - name: nginx-container
+      image: nginx
+      imagePullPolicy: IfNotPresent	# If image is available locally, it will not try to pull from HUB.
+#---------------------------------------#
+# We can get all the pods with label attached. 'kc get pods -l pod-type=web'
+# default policy is pulling and taking latest from HUB/Registry.
+# In production ENV, we should take always stable image.

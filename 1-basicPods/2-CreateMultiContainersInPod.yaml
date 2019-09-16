@@ -6,10 +6,10 @@ metadata:
 
 spec:
   containers:
-    - name: container-1
+    - name: nginx-container-1
       image: nginx
 
-    - name: container-2
+    - name: centos-container-2
       image: centos
       command: ["/bin/bash"] 
       args: ["-c","sleep 200"]

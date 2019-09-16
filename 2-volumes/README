@@ -1,0 +1,11 @@
+1-basic-pod.yaml:
+	Creates a Basic Pod, NO volumes are attached. 
+
+2-emptydir-pod.yaml:
+	Creates a Basic Pod, With emptyDir temporary mount point inside a container.
+
+3-host-path.yaml:
+	Creates a Basic Pod, With hostPath mount point inside a container.
+
+23-emptydir-hostpath.yaml:
+	Creates a Bsic Pod, With EmptyDir Vaolume and HostPath Volume.
