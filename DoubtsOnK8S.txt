@@ -1,0 +1,12 @@
+in serivce account what is the token ?
+
+service account is bounded to namespace ?
+
+what is the need of clusterrolebining with service account ?  A) This is required for delete the pods.
+
+How to check two cluster information from same node using kubeconfig files ?
+
+
+
+
+
