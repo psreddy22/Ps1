@@ -4,6 +4,7 @@ metadata:
   name: pod-nginx
   labels:				# One more Pod metadata type 'labels' key-value data store type.
     pod-type: web			# This Pod is assgned with label 'pod-type: web'
+    application: web
 spec:
   containers:
     - name: nginx-container

@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: PersistentVolume
+
+metadata:
+  name: pv-nfs
+
+spec:
+  capacity:
+    storage: 3Gi 
+  accessModes:
+    - ReadWriteMany		# This PV can be mounted on many pods.
+  nfs:
+    path: /tmp/JenkinsHome
+    server: 10.135.150.29
+    readOnly: false

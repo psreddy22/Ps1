@@ -2,6 +2,8 @@ apiVersion: v1					# We Know...!
 kind: Pod
 metadata:
   name: pod-nginx-emptydir			
+  labels:
+    application: web
 spec:						# Pod Specificaion Starts here..
   volumes:					# We are defining a 'emptyDir' type volume with name 'emptydir-volume', This is definition only.
     - name: emptydir-volume			# This is 'emptyDir' volume definition name (Optional), consumer shoule use this name.

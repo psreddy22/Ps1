@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: jenkins-service-nodeport
+  labels:
+    application: jenkinsci
+spec:
+  type: NodePort
+  ports:
+    - port: 8080
+      nodePort: 32324
+      name: "http"
+    - port: 50000
+      nodePort: 32300
+      name: "slave"
+      targetPort: 50000
+    
+  selector:
+    application: jenkinsci

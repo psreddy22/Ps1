@@ -2,6 +2,8 @@ apiVersion: v1
 kind: Pod
 metadata:
   name: pod-nginx-hostpath
+  labels:
+    application: web
 spec:
   volumes:
     - name: hostpath-volume

@@ -1,0 +1,33 @@
+apiVersion: apps/v1			# 'Deployment' apiVersion
+kind: Deployment			# k8s controller 'Deployment'
+metadata:				# 'Deployment' metadata start here.
+  name: deployment-nginx-hostpath	# 'Deployment' Name
+spec:					# 'Deployment' Specification
+  replicas: 2				# 'ReplicaSet' Section Start.
+  selector: 
+    matchLabels:
+      application: web			# 'ReplicaSet' Section End.
+  template:				# 'Pod' Template Start.
+    metadata:				# 'Pod' metadta, each Pod under this Deployment should appy label.
+      name: deployment-nginx-hostpath
+      labels:
+        application: web
+    spec:				# 'Pod' Specification
+      volumes:
+        - name: hostpath-volume
+          hostPath: 			# volume type 'hostPath'
+            path: /var/jenkins_home	# Path we are defining in this definition can be local path / NFS paths.
+      containers:
+        - name: nginx-container-hostpath
+          image: nginx
+          volumeMounts:
+            - name: hostpath-volume
+              mountPath: /hostpathMount
+#-----------------------------------------------------#
+# 1. Volume type 'hostPath' can be created either by using NFS / local host paths.
+# 2. Exiting NFS mounts can be used as 'hostPath' volumes.
+# 3. 'hostPath' volumes are NOT 'EPHEMERAL'
+# 4. If Pod dies/restarts data will NOT be lost. 
+# 5. Since we are using NFS(it should be mounted before creating 'hostPath' volume), if its mounted on all cluster-nodes, same data will be accessible from new Pod.
+# 6. If you are using a 'hostPath' as a local path which is NOT available on worker node, it will get cretaed at the time of Pod Creation.
+#-----------------------------------------------------#

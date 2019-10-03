@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: nginx-replicaset
+  labels:
+    application: web
+
+spec:
+  replicas: 4			# modify replicas according to your case
+  selector:
+    matchLabels:
+      tier: frontend		# 'Pods' with labels will be consider in this 'ReplicaSet'
+  template:			# Pod template starts here..
+    metadata:
+      labels:
+        tier: frontend		# Pos will get created with this label.
+    spec:
+      containers:
+      - name: nginx-pod
+        image: nginx

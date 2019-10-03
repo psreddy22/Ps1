@@ -1,0 +1,34 @@
+apiVersion: apps/v1			# 'Deployment' apiVersion
+kind: Deployment			# k8s controller,
+metadata:
+  name: jenkins-master-nfs-pvc-deploy	# 'Deployment' Name
+spec:					# 'Deployment' Specification
+  replicas: 1				# 'ReplicaSet' Section Start.
+  selector: 
+    matchLabels:
+      application: jenkinsci		# 'ReplicaSet' Section End.
+  template:				# 'Pod' Template Start.
+    metadata:				# 'Pod' metadta, each Pod under this Deployment should appy label.
+      name: jenkins-master-pod
+      labels:
+        application: jenkinsci
+    spec:				# 'Pod' Specification
+      volumes:
+        - name: pvc-nfs-volume
+          persistentVolumeClaim:  
+            claimName: pvc-nfs
+
+      containers:
+        - name: jenkins-master
+          image: jenkins/jenkins:lts
+          volumeMounts:
+            - name: pvc-nfs-volume
+              mountPath: /var/lib/jenkins
+#-----------------------------------------------------#
+# 1. Volume type 'hostPath' can be created either by using NFS / local host paths.
+# 2. Exiting NFS mounts can be used as 'hostPath' volumes.
+# 3. 'hostPath' volumes are NOT 'EPHEMERAL'
+# 4. If Pod dies/restarts data will NOT be lost. 
+# 5. Since we are using NFS(it should be mounted before creating 'hostPath' volume), if its mounted on all cluster-nodes, same data will be accessible from new Pod.
+# 6. If you are using a 'hostPath' as a local path which is NOT available on worker node, it will get cretaed at the time of Pod Creation.
+#-----------------------------------------------------#

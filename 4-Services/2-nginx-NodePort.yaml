@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-service-nodeport
+  labels:
+    application: web 
+spec:
+  type: NodePort
+  ports:
+    - port: 80
+      nodePort: 32323
+      name: httpnodeport
+  selector:
+    application: web 
